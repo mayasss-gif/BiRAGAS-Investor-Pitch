@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiRAGAS — Investor Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0a0e27;color:#fff;overflow:hidden;height:100vh;width:100vw}
+.slide{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transform:scale(0.95);transition:all 0.8s cubic-bezier(0.4,0,0.2,1);pointer-events:none;padding:60px}
+.slide.active{opacity:1;transform:scale(1);pointer-events:all}
+.slide.prev{opacity:0;transform:translateX(-100px) scale(0.9)}
+.controls{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:100}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.3s}.dot.active{background:#64b5f6;transform:scale(1.3)}
+.nav-btn{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;width:50px;height:50px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:100}.nav-btn:hover{background:rgba(255,255,255,0.2)}.nav-btn.left{left:20px}.nav-btn.right{right:20px}
+.slide-num{position:fixed;top:20px;right:30px;font-size:0.8rem;color:rgba(255,255,255,0.4);z-index:100}
+.logo{position:fixed;top:20px;left:30px;font-size:0.7rem;color:rgba(255,255,255,0.4);z-index:100}
+.audio-btn{position:fixed;top:15px;right:120px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:0.75rem;display:flex;align-items:center;gap:6px;transition:all 0.3s;z-index:100;font-weight:600}.audio-btn:hover{background:rgba(255,255,255,0.2)}.audio-btn.active{background:rgba(100,181,246,0.15);border-color:rgba(100,181,246,0.5);color:#64b5f6}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(100,181,246,0.3)}50%{box-shadow:0 0 40px rgba(100,181,246,0.6)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+.slide.active .a1{animation:fadeUp .8s .2s both}.slide.active .a2{animation:fadeUp .8s .4s both}.slide.active .a3{animation:fadeUp .8s .6s both}.slide.active .a4{animation:fadeUp .8s .8s both}.slide.active .a5{animation:fadeUp .8s 1s both}.slide.active .ac{animation:countUp .6s .8s both}.slide.active .ag{animation:glow 3s .5s infinite}
+.mt{font-size:3.5rem;font-weight:900;letter-spacing:-2px;line-height:1.1;text-align:center}.mt span{background:linear-gradient(135deg,#64b5f6,#ce93d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:1.15rem;color:rgba(255,255,255,0.7);text-align:center;margin-top:14px;font-weight:300;max-width:750px}
+.b{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.72rem;font-weight:600;margin:3px}
+.bb{background:rgba(100,181,246,.15);color:#64b5f6;border:1px solid rgba(100,181,246,.3)}.bg{background:rgba(129,199,132,.15);color:#81c784;border:1px solid rgba(129,199,132,.3)}.bp{background:rgba(206,147,216,.15);color:#ce93d8;border:1px solid rgba(206,147,216,.3)}.br{background:rgba(239,154,154,.15);color:#ef9a9a;border:1px solid rgba(239,154,154,.3)}.bo{background:rgba(255,183,77,.15);color:#ffb74d;border:1px solid rgba(255,183,77,.3)}
+.sr{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:28px 0}.si{text-align:center;min-width:90px}.sn{font-size:2.4rem;font-weight:900;line-height:1}.sn.blue{color:#64b5f6}.sn.purple{color:#ce93d8}.sn.green{color:#81c784}.sn.orange{color:#ffb74d}.sn.red{color:#ef9a9a}.sl{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:5px;text-transform:uppercase;letter-spacing:1px}
+.cg{display:grid;gap:12px;max-width:1100px;width:100%}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+.c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px;backdrop-filter:blur(10px)}.c h3{font-size:.9rem;margin-bottom:5px;font-weight:700}.c p{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.45}
+.cb{border-color:rgba(100,181,246,.3);background:rgba(100,181,246,.05)}.cg2{border-color:rgba(129,199,132,.3);background:rgba(129,199,132,.05)}.cp{border-color:rgba(206,147,216,.3);background:rgba(206,147,216,.05)}.cr{border-color:rgba(239,154,154,.3);background:rgba(239,154,154,.05)}
+table{width:100%;border-collapse:collapse;font-size:.76rem;max-width:1000px}th{text-align:left;padding:7px 10px;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.1);font-weight:600;font-size:.65rem;text-transform:uppercase;letter-spacing:1px}td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.8)}tr:hover td{background:rgba(255,255,255,.03)}
+@media(max-width:768px){.mt{font-size:2rem}.sn{font-size:1.6rem}.cg.g2,.cg.g3,.cg.g4{grid-template-columns:1fr}.slide{padding:30px}}
+</style>
+</head>
+<body>
+
+<!-- S1: TITLE -->
+<div class="slide active" id="s0">
+<div class="a1"><span class="b bb">Ayass Bioscience LLC</span><span class="b bp">Frisco, Texas</span><span class="b bg">Series Seed</span></div>
+<h1 class="mt a2">BiRAGAS<br><span>Investor Pitch</span></h1>
+<p class="sub a3">The Autonomous Pharmaceutical Discovery Engine<br>Proving Causation — Not Correlation — at 88.9 Billion Scale</p>
+<div class="sr a4">
+<div class="si"><div class="sn blue">837+</div><div class="sl">AI Modules</div></div>
+<div class="si"><div class="sn purple">88.9B</div><div class="sl">Combinations</div></div>
+<div class="si"><div class="sn green">23</div><div class="sl">Causal Modules</div></div>
+<div class="si"><div class="sn orange">6</div><div class="sl">Collaborators</div></div>
+<div class="si"><div class="sn red">$12M+</div><div class="sl">Grant Pipeline</div></div>
+</div>
+<div class="a5"><span class="b bg">7-Phase Causal Proof</span><span class="b bb">Cross-Modal CRISPR</span><span class="b bp">Hallucination-Shielded</span><span class="b br">Production-Ready</span></div>
+</div>
+
+<!-- S2: PROBLEM -->
+<div class="slide" id="s1">
+<h1 class="mt a1" style="font-size:2.3rem">The <span>$2.6 Billion</span> Problem</h1>
+<div class="cg g3 a2" style="margin-top:28px">
+<div class="c cr"><h3 style="color:#ef9a9a">92% Failure Rate</h3><p>Only 7.9% of drugs from Phase I reach approval. The industry burns $2.6B per approved drug over 12-15 years.</p></div>
+<div class="c cr"><h3 style="color:#ef9a9a">50% Wrong Targets</h3><p>Half of all drug failures trace back to pursuing non-causal targets. GWAS finds correlations. ML finds patterns. Neither proves causation.</p></div>
+<div class="c cr"><h3 style="color:#ef9a9a">65% Phase II Death</h3><p>The "Valley of Death" — Phase II fails 65% of the time, primarily for lack of efficacy. The drug hits the wrong target.</p></div>
+</div>
+<div class="c a3 cg2" style="max-width:750px;text-align:center;margin-top:24px">
+<h3 style="color:#81c784">BiRAGAS: The Solution</h3>
+<p style="font-size:.88rem;color:rgba(255,255,255,.85)">We don't find patterns. We <strong style="color:#fff">prove causation</strong> — through Mendelian Randomization, Pearl's do-calculus, and 23-module validation. Targets are causally validated <strong style="color:#81c784">before</strong> a single dollar is spent on drug development.</p>
+</div>
+</div>
+
+<!-- S3: PLATFORM -->
+<div class="slide" id="s2">
+<h1 class="mt a1" style="font-size:2.2rem">3-Layer <span>Causal</span> Architecture</h1>
+<div class="cg g3 a2" style="margin-top:24px">
+<div class="c cb"><h3 style="color:#64b5f6">Layer 1: Population Evidence</h3><p>DESeq2, GSEA, CIBERSORTx, EdgeR, Limma. Purely correlational. <strong style="color:#fff">No causal claims allowed.</strong></p><div style="margin-top:8px"><span class="b bb" style="font-size:.6rem">DESeq2</span><span class="b bb" style="font-size:.6rem">GSEA</span><span class="b bb" style="font-size:.6rem">CIBERSORTx</span></div></div>
+<div class="c cp"><h3 style="color:#ce93d8">Layer 2: Contextualization</h3><p>Bio-RAG (8.6M vectors), chromatin filtering, KG pruning. Candidates become <strong style="color:#fff">plausible, not proven.</strong></p><div style="margin-top:8px"><span class="b bp" style="font-size:.6rem">Bio-RAG 8.6M</span><span class="b bp" style="font-size:.6rem">KG Pruning</span></div></div>
+<div class="c cg2"><h3 style="color:#81c784">Layer 3: Causal Validation</h3><p>NOTEARS + DoWhy + EconML + Refutation. Only edges surviving all tests labeled <strong style="color:#fff">causally validated.</strong></p><div style="margin-top:8px"><span class="b bg" style="font-size:.6rem">NOTEARS</span><span class="b bg" style="font-size:.6rem">DoWhy</span><span class="b bg" style="font-size:.6rem">Refutation</span></div></div>
+</div>
+<div class="c a3" style="max-width:850px;margin-top:20px;text-align:center;border-color:rgba(239,154,154,.2);background:rgba(239,154,154,.03)">
+<h3 style="color:#ef9a9a;font-size:.85rem">Hallucination Shield: 7 Detection Categories</h3>
+<p style="font-size:.75rem">Causal Language &bull; Edge Fabrication &bull; Effect Inflation &bull; Confounder Blindness &bull; Mechanism Fabrication &bull; Statistical Hallucination &bull; Aggregation Fallacy — <strong style="color:#fff">All blocked. Confidence gate &ge;0.65.</strong></p>
+</div>
+</div>
+
+<!-- S4: SCALE -->
+<div class="slide" id="s3">
+<h1 class="mt a1" style="font-size:2.2rem">Platform <span>Scale</span></h1>
+<div class="cg g4 a2" style="margin-top:20px">
+<div class="c cb" style="text-align:center"><div class="sn blue ac" style="font-size:2rem">837+</div><div class="sl">Python Modules</div><p style="margin-top:6px">Autonomous end-to-end pipeline</p></div>
+<div class="c cp" style="text-align:center"><div class="sn purple ac" style="font-size:2rem">88.9B</div><div class="sl">Combinations</div><p style="margin-top:6px">22.2B DNA + 22.2B RNA + 44.5B cross-modal</p></div>
+<div class="c cg2" style="text-align:center"><div class="sn green ac" style="font-size:2rem">23</div><div class="sl">Causality Modules</div><p style="margin-top:6px">7 phases: DAG → MR → Perturbation → Pharma</p></div>
+<div class="c" style="text-align:center;border-color:rgba(255,183,77,.3)"><div class="sn orange ac" style="font-size:2rem">12</div><div class="sl">Synergy Models</div><p style="margin-top:6px">6 classical + 6 cross-modal (first ever)</p></div>
+</div>
+<div class="cg g3 a3" style="margin-top:14px">
+<div class="c" style="text-align:center;border-color:rgba(77,208,225,.3)"><div style="font-size:1.4rem;font-weight:800;color:#4dd0e1">16,180</div><div class="sl">DEGs (urine)</div></div>
+<div class="c" style="text-align:center;border-color:rgba(206,147,216,.3)"><div style="font-size:1.4rem;font-weight:800;color:#ce93d8">1,869</div><div class="sl">lncRNAs</div></div>
+<div class="c" style="text-align:center;border-color:rgba(129,199,132,.3)"><div style="font-size:1.4rem;font-weight:800;color:#81c784">382</div><div class="sl">miRNAs</div></div>
+</div>
+<p class="a4" style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:14px">+ 210,859 knockout configs &bull; 6 nuclease platforms &bull; 57-step pipeline &bull; GNN inference &bull; WGCNA modules &bull; ceRNA networks</p>
+</div>
+
+<!-- S5: COMPETITIVE -->
+<div class="slide" id="s4">
+<h1 class="mt a1" style="font-size:2rem">Competitive <span>Advantage</span></h1>
+<table class="a2" style="margin-top:24px">
+<thead><tr><th></th><th>Recursion ($8B+)</th><th>Insitro</th><th>BenevolentAI</th><th style="color:#64b5f6">BiRAGAS</th></tr></thead>
+<tbody>
+<tr><td><strong>Approach</strong></td><td style="color:rgba(255,255,255,.4)">Image correlations</td><td style="color:rgba(255,255,255,.4)">ML cell painting</td><td style="color:rgba(255,255,255,.4)">Knowledge graphs</td><td><strong style="color:#81c784">Causal inference (MR + do-calculus)</strong></td></tr>
+<tr><td><strong>Validation</strong></td><td style="color:rgba(255,255,255,.4)">None</td><td style="color:rgba(255,255,255,.4)">None</td><td style="color:rgba(255,255,255,.4)">Partial</td><td><strong style="color:#81c784">23-module, 7-phase, hallucination-shielded</strong></td></tr>
+<tr><td><strong>CRISPR Combos</strong></td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">No</td><td><strong style="color:#81c784">88.9B (DNA&times;RNA cross-modal)</strong></td></tr>
+<tr><td><strong>Patient-level DAGs</strong></td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">Population</td><td style="color:rgba(255,255,255,.4)">No</td><td><strong style="color:#81c784">Per-patient causal architecture</strong></td></tr>
+<tr><td><strong>Hallucination QC</strong></td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">No</td><td><strong style="color:#81c784">7-category RAGAS shield</strong></td></tr>
+<tr><td><strong>ncRNA Data</strong></td><td style="color:rgba(255,255,255,.4)">No</td><td style="color:rgba(255,255,255,.4)">Limited</td><td style="color:rgba(255,255,255,.4)">No</td><td><strong style="color:#81c784">1,869 lncRNAs + 382 miRNAs (proprietary)</strong></td></tr>
+</tbody>
+</table>
+<div class="c a3 ag" style="max-width:700px;text-align:center;margin-top:20px;border-color:rgba(100,181,246,.3)">
+<p style="font-size:.88rem;color:rgba(255,255,255,.9)">They find <strong style="color:#ef9a9a">patterns</strong>. We prove <strong style="color:#81c784">causation</strong>. That's the difference between a billion-dollar drug and a billion-dollar failure.</p>
+</div>
+</div>
+
+<!-- S6: COLLABORATORS -->
+<div class="slide" id="s5">
+<h1 class="mt a1" style="font-size:2rem">6 World-Class <span>Collaborators</span></h1>
+<div class="cg g3 a2" style="margin-top:20px">
+<div class="c cr"><h3 style="font-size:.82rem;color:#ef9a9a">Dr. Houda Alachkar — USC</h3><p>AML Leukemia. FLT3/CD99/SPARC. NIH R01. 66+ pubs. Anti-CD99 nanoworms. 4 papers + R01 ($2-3M)</p></div>
+<div class="c cg2"><h3 style="font-size:.82rem;color:#81c784">Dr. John Imig — UAMS</h3><p>Diabetic Nephropathy. EET analogs. 5 patents. 3 companies. 300+ pubs. 4 papers + R01/P01 ($7M+)</p></div>
+<div class="c cb"><h3 style="font-size:.82rem;color:#64b5f6">Dr. Andrzej Krolewski — Harvard/Joslin</h3><p>DKD Biomarkers. TNFR1/2. SOMAscan proteomics. 2025 Nature Comms. Highest compatibility (9.5/10)</p></div>
+<div class="c a3 cp"><h3 style="font-size:.82rem;color:#ce93d8">Dr. Chris Hughes — UCI/Aracari</h3><p>Organ-on-chip (VMO/VMT/VMB). Drug validation in vascularized kidney/tumor chips.</p></div>
+<div class="c a3" style="border-color:rgba(255,183,77,.3)"><h3 style="font-size:.82rem;color:#ffb74d">Dr. Winston Hide — Harvard</h3><p>Pathprint pathways. Drug repositioning. Non-coding RNA. AltAnalyze splicing.</p></div>
+<div class="c a3" style="border-color:rgba(77,208,225,.3)"><h3 style="font-size:.82rem;color:#4dd0e1">Dr. Amal Alachkar — UCI</h3><p>Neuropsychiatry. Schizophrenia. GPCR/ion channels. Multi-modal transcriptomics. 50/50 IP.</p></div>
+</div>
+<div class="a4" style="text-align:center;margin-top:14px"><span class="b bg">6 Partners</span><span class="b bb">5 Institutions</span><span class="b bp">~20 Papers</span><span class="b bo">$12M+ Grants</span><span class="b br">AML + DN + DKD + Cancer + Neuro</span></div>
+</div>
+
+<!-- S7: DATA MOAT -->
+<div class="slide" id="s6">
+<h1 class="mt a1" style="font-size:2rem">Proprietary <span>Data Moat</span></h1>
+<div class="cg g2 a2" style="margin-top:24px">
+<div class="c cb"><h3 style="color:#64b5f6">Urine Transcriptome (Proprietary)</h3><p>&#8226; 16,180 differentially expressed genes from patient samples<br>&#8226; 1,869 long non-coding RNAs (no competitor has this)<br>&#8226; 382 miRNAs + snoRNAs<br>&#8226; WGCNA co-expression modules + hub genes<br>&#8226; ceRNA regulatory networks (pipeline ready)<br>&#8226; 770,852 multi-omics events (variants + splicing + fusions)<br>&#8226; Differential transcript isoform usage analysis</p></div>
+<div class="c cp"><h3 style="color:#ce93d8">BiRAGAS CRISPR Complete (551 files)</h3><p>&#8226; 88.9B combination predictions (DNA&times;RNA cross-modal)<br>&#8226; 210,859 knockout configurations (7-method ensemble)<br>&#8226; 12 synergy models (6 classical + 6 cross-modal — unique)<br>&#8226; 6 nuclease platforms (Cas9, Cas12a, Cas13, dCas13)<br>&#8226; RNA base editing (A&rarr;I, C&rarr;U without DNA cut)<br>&#8226; 5-dimension safety assessor + resistance predictor<br>&#8226; Agentic self-correction with 9 autonomous checks</p></div>
+</div>
+<div class="cg g3 a3" style="margin-top:14px">
+<div class="c" style="text-align:center"><div style="font-size:1.3rem;font-weight:800;color:#81c784">57</div><div class="sl">Documented Steps</div><p style="margin-top:4px;font-size:.72rem">Full pipeline from ingestion to clinical report</p></div>
+<div class="c" style="text-align:center"><div style="font-size:1.3rem;font-weight:800;color:#ffb74d">191</div><div class="sl">DN Gene Panel</div><p style="margin-top:4px;font-size:.72rem">DESeq2-validated EC/Stromal/ECM signatures</p></div>
+<div class="c" style="text-align:center"><div style="font-size:1.3rem;font-weight:800;color:#ef9a9a">7</div><div class="sl">Hallucination Categories</div><p style="margin-top:4px;font-size:.72rem">RAGAS QC — nothing passes without evidence</p></div>
+</div>
+</div>
+
+<!-- S8: ASK -->
+<div class="slide" id="s7">
+<div class="a1"><span class="b bg">Investment Opportunity</span></div>
+<h1 class="mt a2" style="margin-top:14px;font-size:2.6rem">The Future of <span>Drug Discovery</span></h1>
+<div class="cg g3 a3" style="margin-top:24px">
+<div class="c cb"><h3 style="color:#64b5f6">1. Platform Deploy</h3><p>Cloud infrastructure, enterprise API, security. Making BiRAGAS accessible to pharma worldwide.</p></div>
+<div class="c cp"><h3 style="color:#ce93d8">2. Clinical Validation</h3><p>Wet-lab validation through 6 academic partners. Turning predictions into peer-reviewed evidence.</p></div>
+<div class="c cg2"><h3 style="color:#81c784">3. Regulatory Path</h3><p>FDA engagement on AI-driven causal target discovery as regulatory-grade methodology.</p></div>
+</div>
+<div class="sr a4">
+<div class="si"><div class="sn blue ac">837+</div><div class="sl">Modules</div></div>
+<div class="si"><div class="sn purple ac">88.9B</div><div class="sl">Combinations</div></div>
+<div class="si"><div class="sn green ac">6</div><div class="sl">Partners</div></div>
+<div class="si"><div class="sn orange ac">~20</div><div class="sl">Joint Papers</div></div>
+<div class="si"><div class="sn red ac">$12M+</div><div class="sl">Grant Pipeline</div></div>
+</div>
+<div class="a5" style="text-align:center;margin-top:24px">
+<p style="font-size:1.3rem;font-weight:700;color:#64b5f6">Ayass Bioscience LLC</p>
+<p style="font-size:.85rem;color:rgba(255,255,255,.5);margin-top:6px">Frisco, Texas &bull; contact@ayassbioscience.com</p>
+<p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:8px">Confidential &mdash; For Qualified Investors Only &mdash; 2026</p>
+</div>
+</div>
+
+<!-- CONTROLS -->
+<button class="audio-btn" id="audioBtn" onclick="toggleAudio()">&#128263; Audio Off</button>
+<div class="logo">Ayass Bioscience &mdash; BiRAGAS</div>
+<div class="slide-num" id="slideNum">1 / 8</div>
+<button class="nav-btn left" onclick="prev()">&#9664;</button>
+<button class="nav-btn right" onclick="next()">&#9654;</button>
+<div class="controls" id="dots"></div>
+<script>
+let current=0;const total=8;const slides=document.querySelectorAll('.slide');const dotsEl=document.getElementById('dots');
+let audioEnabled=false;let currentAudio=null;
+function toggleAudio(){audioEnabled=!audioEnabled;const btn=document.getElementById('audioBtn');if(audioEnabled){btn.classList.add('active');btn.innerHTML='&#128264; Audio On';playAudioForSlide(current)}else{btn.classList.remove('active');btn.innerHTML='&#128263; Audio Off';if(currentAudio){currentAudio.pause();currentAudio.currentTime=0}}}
+function playAudioForSlide(n){if(currentAudio){currentAudio.pause();currentAudio.currentTime=0}if(!audioEnabled)return;currentAudio=new Audio(`slide_${n+1}.mp3`);currentAudio.play().catch(e=>console.log("Audio blocked:",e))}
+for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d)}
+function goTo(n){slides[current].classList.remove('active');slides[current].classList.add('prev');current=n;slides.forEach((s,i)=>{if(i!==current){s.classList.remove('active');s.classList.remove('prev')}});slides[current].classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));document.getElementById('slideNum').textContent=(current+1)+' / '+total;playAudioForSlide(current)}
+function next(){goTo((current+1)%total)}function prev(){goTo((current-1+total)%total)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowLeft')prev()});
+</script>
+</body>
+</html>
